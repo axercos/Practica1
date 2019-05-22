@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<title>Mi primer piano HTML5</title>
+</head>
+<body>
+	<h1>Tocáme alv</h1>
+	
+	<!--
+	<a href="javascript:sonido('do');"> Do </a>|
+	<a href="javascript:sonido('re');"> Re </a>|
+	<a href="javascript:sonido('mi');"> Mi </a>|
+	<a href="javascript:sonido('fa');"> Fa </a>|
+	<a href="javascript:sonido('sol');"> Sol </a>|
+	<a href="javascript:sonido('la');"> La </a>|
+	<a href="javascript:sonido('si');"> Si </a>|
+	<a href="javascript:sonido('cñora');"> Canción </a>|
+	-->
+
+	
+		<button data-nota="do" data-key="a">DO</button>
+		<button data-nota="re" data-key="s">RE</button>
+		<button data-nota="mi" data-key="d">MI</button>
+		<button data-nota="fa" data-key="f">FA</button>
+		<button data-nota="sol" data-key="g">SOL</button>
+		<button data-nota="la" data-key="h">LA</button>
+		<button data-nota="si" data-key="j">SI</button>
+		<button data-nota="cnora" data-key="k">DO</button>
+	
+
+	<audio id="do" src="audio/DO.wav"></audio>
+	<audio id="re" src="audio/RE.wav"></audio>
+	<audio id="mi" src="audio/MI.wav"></audio>
+	<audio id="fa" src="audio/FA.wav"></audio>
+	<audio id="sol" src="audio/SOL.wav"></audio>
+	<audio id="la" src="audio/LA.wav"></audio>
+	<audio id="si" src="audio/SI.wav"></audio>
+	<audio id="cnora" src="audio/CÑORA.mp3"></audio>
+
+	<script type="text/javascript">
+		/*function sonido (nota){
+			try{
+			var audio = document.getElementById(nota);
+			audio.pause();
+			audio.currentTime = 0;
+			audio.play();
+			}catch(e){
+				alert("Error: " + e);
+			}
+		}*/
+
+		const botones = document.querySelectorAll('button');
+		botones.forEach(
+			button => button.addEventListener('click', playSound)
+		);
+
+		function playSound(event){
+			try{
+			const btn = event.target;
+			const notaMusical = btn.dataset.nota;
+			audio = document.getElementById(notaMusical);
+			audio.pause();
+			audio.currentTime = 0;
+			audio.play();
+			}catch(e){
+				alert("Error: "+ e);
+			}
+		}
+
+		document.addEventListener('keydown',function(){
+			console.log(event.key);
+			const key = event.key;
+			const button = document.querySelector('button[data-key="'+ key +'"]');
+			if (button) {
+				button.click();
+			}
+		});
+
+	</script>
+</body>
+</html>
